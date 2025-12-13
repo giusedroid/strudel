@@ -1,0 +1,39 @@
+setcpm(120/4)
+
+// BASS
+$: note("<[c2*2 c3]*4 [bb1*2 bb2]*4 [f2*2 f3]*4 [eb2*2 eb3]*4>")
+.sound("sawtooth")
+.lpf(sine.range(100, 2000).slow(2))._pianoroll()
+
+// SWINGING DRUMS
+$: s("bd [hh hh]").swingBy(1/4,1).room(0.8).orbit(1).lpf(2000).delay(0.8)._pianoroll()
+
+// HYPE DRUMS
+_$: s("bd!4").orbit(1).fast("<1 1 2 4>")._pianoroll()
+
+// MAIN HARMONY
+$: chord("C2 Bbadd9 F7 Eb")
+  .ply(1)
+  .delay(0.8)
+  .sound("piano")
+  .room(0.8)
+  .voicing().slow(4)
+
+// SPRINKLE
+$: note(
+  //"c5*16"
+  "<c5*16 <f5*16 eb6*16>>"
+  .add("<0 4 7 12>*16")
+  
+  )
+  .sound("bytebeat")
+  .pan(sine.range(1/6, 5/6).slow(1)).lpf(tri.range(200, 10000))
+
+// APRI TUTTO
+$: note("c4 - <f4 bb4> -").sound("piano")
+
+// APRI TUTTO SWING
+$: note("<f6*8!3 bb6*8>").swingBy(1/8,1).sound("piano")
+  .gain(tri.range(2, 3.5))
+  ._scope()
+

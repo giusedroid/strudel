@@ -1,0 +1,25 @@
+// Play: https://strudel.cc/#CnNhbXBsZXMoJ2dpdGh1Yjpzd2l0Y2hhbmdlbC9icmVha3MnKQoKJDogY2hvcmQoIjxBbSBGYWRkOSBDIEc%2BIikudm9pY2luZygpCiAgLnMoInBpYW5vIikKICAuYmVhdCgiMCw0LDcsMTAsMTIsMTQsMTYiLCAxNikucGx5KDEpLl9waWFub3JvbGwoKQpfJDogc291bmQoImJkIFtiZCxyaW1dIGJkIFtiZCxyaW1dICIpLmxwZigxODAwKQpfJDogc291bmQoImhoKjMgb2giKS5scGYoMzAwMCkKXyQ6IHNvdW5kKCJiZCoxNiIpCgokOnNvdW5kKCJicmVha3MvMiIpLmZpdCgpLmdhaW4oMS4zKQoKJDogcygic3F1YXJlKjE2IikKICAubm90ZShyYW5kLnJhbmdlKC04LCA4KS5kZWdyYWRlQnkoMC41KSkKICAuc2NhbGUoIkE6bWlub3IiKQogIC5yaWIoMSwyKQogIC5nYWluKHNsaWRlcigwLjQsIDAsIDEwLCAwLjIpKQogIC5kaXN0KHNsaWRlcigxLjk5LCAwLDEwKSkKICAucm9vbShzbGlkZXIoMi42LDAsMTAsIDAuMSkpCiAgLmRlbGF5KHNsaWRlcigwLjgsMCw1LCAwLjEpKQogIC5kZWNheSgwLjA1KQogIC5hdHRhY2soMC4xKQogIC5scGYoc2xpZGVyKDIxMDAsNTAwLDEwMDAwLCAxMDApKQogIC5fcGlhbm9yb2xsKCkK
+
+samples('github:switchangel/breaks')
+
+$: chord("<Am Fadd9 C G>").voicing()
+  .s("piano")
+  .beat("0,4,7,10,12,14,16", 16).ply(1)._pianoroll()
+_$: sound("bd [bd,rim] bd [bd,rim] ").lpf(1800)
+_$: sound("hh*3 oh").lpf(3000)
+_$: sound("bd*16")
+
+$:sound("breaks/2").fit().gain(1.3)
+
+$: s("square*16")
+  .note(rand.range(-8, 8).degradeBy(0.5))
+  .scale("A:minor")
+  .rib(1,2)
+  .gain(slider(0.4, 0, 10, 0.2))
+  .dist(slider(1.99, 0,10))
+  .room(slider(2.6,0,10, 0.1))
+  .delay(slider(0.8,0,5, 0.1))
+  .decay(0.05)
+  .attack(0.1)
+  .lpf(slider(2100,500,10000, 100))
+  ._pianoroll()

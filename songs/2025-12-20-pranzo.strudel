@@ -42,9 +42,9 @@ const randomized_melody =
 
 stack(
   // s("bd").gain(0.1),
-  bass.gain(slider(1.1, 0, 3, 0.1)), 
-  drums.gain(slider(0, 0, 3, 0.1)),
-  main_melody.gain(slider(0, 0, 3, 0.1)),
-  break_drums.gain(slider(0.8, 0, 3, 0.1)),
-  randomized_melody.gain(slider(0.9, 0, 3, 0.1))
+  bass.gain(slider(3, 0, 3, 0.1)), 
+  drums.gain(slider(1, 0, 3, 0.1)),
+  main_melody.gain(slider(1.1, 0, 3, 0.1)),
+  break_drums.gain(slider(1.3, 0, 3, 0.1)),
+  randomized_melody.gain(slider(0, 0, 3, 0.1))
 )._scope()

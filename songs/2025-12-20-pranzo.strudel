@@ -2,15 +2,15 @@ samples('github:switchangel/breaks')
 
 const syncSlider = slider(200, 200, 20000, 50)
 
-const main_melody = note("a4 b4 c#4 d4 e4 _ [a4, a3] _ [a3, a5] _ g# f# e4 _ a4 _ f#4 _  e4  d4 c#4 _ [a4, a3] _ b3 _ a3 g#3 [a4, a3] _ _ _")
+const main_melody = note("a4 b4 c#4 d4 e4 _ [a4, a3] _ [a3, a5] _ [g#3@1.5 g#4] f#4 e4 _ a4 _ f#4 _  e4  d4 c#4 _ [a4, a3] _ b3 _ a3 g#3 [a4, a3] _ _ _")
   .sound("piano").slow(4).transpose("0")
   .release(0.2)
   .room(2)
-  .delay(0.6)
-  .gain(slider(2.3, 0, 3, 0.1))
+  .delay(0.8)
+  .gain(slider(1, 0, 3, 0.1))
   ._pianoroll()
 
-const break_drums =  s("breaks:3/2").fit().scrub(irand(8).div(16).seg(4).rib(2,2))
+const break_drums =  s("breaks:3/2").fit().scrub(irand(8).div(16).seg(2).rib(2,2))
   .almostNever( x => x.ply("<4 8 16>"))
   .gain(slider(1.3,0,3, 0.1))
   .room(0.8)
@@ -27,13 +27,24 @@ const bass = note("0*2 _  <[-5 _ -5] [-2 _  -2]> _ _")
 
 const low_drums = s("bd [bd, rim] bd [bd, sd]")
 
-const hi_drums =  s("hh*16").hush()
+const hi_drums =  s("hh*16")
 
 const drums= stack(low_drums, hi_drums)
 
+const randomized_melody = 
+  n(irand("8").seg(8)).anchor("a5")
+  .scale("a:major").degradeBy(0.3)
+  .sound("saw").rib(4,2)
+  .fm("<0.5 1 1.5 2 4>")
+  .crush(4)
+  .delay(1/4)
+
+
 stack(
-  bass.gain(slider(0, 0, 3, 0.1)), 
+  // s("bd").gain(0.1),
+  bass.gain(slider(1.1, 0, 3, 0.1)), 
   drums.gain(slider(0, 0, 3, 0.1)),
-  // main_melody,
-  break_drums.gain(slider(0, 0, 3, 0.1))
+  main_melody.gain(slider(0, 0, 3, 0.1)),
+  break_drums.gain(slider(0.8, 0, 3, 0.1)),
+  randomized_melody.gain(slider(0.9, 0, 3, 0.1))
 )._scope()

@@ -1,0 +1,34 @@
+samples('github:switchangel/breaks')
+setCpm(120)
+
+const freqSlider = slider(15500, 100, 20000, 100)
+const triSlider = tri.range(200, 20000)
+const intSlider = slider(1, 0, 8,1)
+
+$: s("bd:6")
+
+$: s("[- clap]*4").slow(4).ply(2)
+
+$: note("[g#1@1.33 c#2 _] c#2 g#1 c#2 _ ")
+    .slow(4).s("supersaw")
+    .attack(0.2)
+    .decay(0.1)
+    .delay(0.8)
+    .room(1)
+    ._punchcard()
+
+$: note(irand(8).seg(16))
+  .degradeBy(0.3).slow(4)
+  .anchor("f#5")
+  .scale("f#:minor")
+  .rib(1,4).s("piano")
+  ._punchcard()
+$: s("white*4").lpf(freqSlider)
+  .fm("<200 400 800 1600>")
+  .attack(0.4)
+  .delay(0.4)
+  ._scope()
+// all(x => x.lpf(freqSlider) )
+// all( x => x.ply(8))
+
+// all(x => x.rib(1, 1/8))
